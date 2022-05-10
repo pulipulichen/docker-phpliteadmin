@@ -735,6 +735,7 @@ function get_type_affinity($type)
 		return "NUMERIC";
 }
 
+
 // Returns a file size limit in bytes based on the PHP upload_max_filesize
 // post_max_size and memory_limit. Returns -1 in case of no limit.
 function fileUploadMaxSize()

@@ -1,4 +1,6 @@
-TAG=20220504-2322
+TAG=20220510-2103
 
-docker build -t pudding/docker-phpliteadmin:$TAG .
-docker push pudding/docker-phpliteadmin:$TAG
+REPO=docker-phpliteadmin
+
+docker build -t pudding/$REPO:$TAG .
+docker push pudding/$REPO:$TAG

@@ -1,18 +1,6 @@
 <?php
-if (getenv("PASSWORD")) {
-	$password = getenv("PASSWORD");
-}
-else {
-	$password = "admin";
-}
-
-if (getenv("LOCATION")) {
-	$directory = getenv("LOCATION");
-}
-else {
-	$directory = "/db/";
-}
-
+$password = getenv("PASSWORD") ?? 'admin';
+$directory = getenv("LOCATION") ?? '/db';
 $subdirectories = true;
 $theme = 'phpliteadmin.css';
 $language = 'en';

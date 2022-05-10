@@ -1,4 +1,4 @@
-FROM php:8-apache
+FROM php:7.3.22-apache-stretch
 
 RUN apt-get update && apt-get install -y wget curl unzip sqlite3 libsqlite3-dev
 RUN docker-php-ext-install pdo_sqlite
@@ -13,16 +13,16 @@ WORKDIR /var/www/html
 COPY html/* /var/www/html/
 RUN chmod +x -R *.php
 RUN chown www-data:www-data -R *
-RUN mv phpliteadmin.php index.php
+RUN cp phpliteadmin.php index.php
 
 RUN mkdir /db
 RUN chmod -R 777 /db
 
 # ENV LOCATION=/db
+ENV PORT=80
 
-# COPY scripts /scripts
-# COPY scripts/database.sqlite /db-default/
-# #RUN mkdir /db
-# RUN chmod -R 777 /db
+COPY scripts /scripts
+COPY scripts/database.sqlite /db-default/
+RUN chmod -R 777 /db
 
-# CMD ["sh", "/scripts/init.sh"]
+CMD ["sh", "/scripts/init.sh"]
