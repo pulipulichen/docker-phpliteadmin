@@ -1,30 +1,28 @@
-FROM shadowcodex/phpliteadmin:latest
+FROM php:8-apache
 
-# RUN apt-get update
-# RUN apt-get install -y curl
-# RUN curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
-# #filebrowser -r /path/to/your/files
+RUN apt-get update && apt-get install -y wget curl unzip sqlite3 libsqlite3-dev
+RUN docker-php-ext-install pdo_sqlite
+RUN docker-php-ext-enable pdo_sqlite 
 
+#WORKDIR /tmp
+#RUN wget https://bitbucket.org/phpliteadmin/public/downloads/phpLiteAdmin_v1-9-8-2.zip
+#RUN unzip phpLiteAdmin_v1-9-8-2.zip -d /var/www/html/
+#RUN rm phpLiteAdmin_v1-9-8-2.zip
 
-# #RUN mkdir /database
-# # RUN filebrowser config init
-# # #RUN echo "20220503-1528 "
-# # RUN mkdir -p /data
-# # RUN filebrowser config set --root /data
-# #RUN filebrowser users update admin --password t343434
-# # RUN echo "20220503-1528 "
-# # RUN echo $FB_USERNAME
-# # RUN echo $FB_PASSWORD
-# #RUN /filebrowser users add user password
-# # RUN echo "{}"
+WORKDIR /var/www/html
+COPY html/* /var/www/html/
+RUN chmod +x -R *.php
+RUN chown www-data:www-data -R *
+RUN mv phpliteadmin.php index.php
 
-# RUN mkdir /config
-# RUN mkdir -p /data
+RUN mkdir /db
+RUN chmod -R 777 /db
 
-# #RUN filebrowser users add user2 $2y$10$kK216YyEwh4MnFTo.iu.VuB9YKujPJa6vKTA2Vkw78i1sApCAmA1m
-# RUN filebrowser config init
-# RUN cp /filebrowser.db /filebrowser.db.clone
-# COPY scripts /config
-# #CMD ["filebrowser", "-c", "/config/config.json", "-r", "/data"]
+# ENV LOCATION=/db
 
-# CMD ["bash", "/config/init.sh"]
+# COPY scripts /scripts
+# COPY scripts/database.sqlite /db-default/
+# #RUN mkdir /db
+# RUN chmod -R 777 /db
+
+# CMD ["sh", "/scripts/init.sh"]

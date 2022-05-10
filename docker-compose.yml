@@ -1,15 +1,15 @@
 version: "3"
 services:
   app:
-    #build: .
-    image: vtacquet/phpliteadmin:v1.03
+    build: .
+    #image: vtacquet/phpliteadmin:v1.03
     volumes: 
-      - ./data:/db:rw
+      - ./db:/db:rw
+      #- ./html:/var/www/html:rw
       #- ./scripts/:/config/:rw
       #- ./data/users.json.blank:/config/www/private/users.json.blank
     ports:
       - "9081:80"
     environment:
        PASSWORD: password
-       LOCATION: /db
     #    FB_PASSWORD: password
