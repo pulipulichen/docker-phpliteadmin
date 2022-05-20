@@ -10,4 +10,5 @@ else
   ENV_PORT="${PORT}"
 fi
 
+echo "phpLiteAdmin is started. http://0.0.0.0:$ENV_PORT/"
 php -t /var/www/html/ -S 0.0.0.0:$ENV_PORT phpliteadmin.php
