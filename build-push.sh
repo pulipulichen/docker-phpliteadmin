@@ -1,4 +1,4 @@
-TAG=20220520-1604
+TAG=20220520-1612
 
 REPO=docker-phpliteadmin
 
